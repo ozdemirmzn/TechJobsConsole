@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -28,7 +31,7 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> job in AllJobs)
             {
-                string aValue = job[column];
+                string aValue = job[column]; 
 
                 if (!values.Contains(aValue))
                 {
@@ -49,10 +52,43 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
+            }
+
+            return jobs;
+        }
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> job in row)
+                {
+
+                    string aValue = job.Key;
+                    Console.WriteLine(aValue);
+                    string bValue = job.Value;
+                    Console.WriteLine(bValue);
+
+                    if (aValue.ToLower().Contains(value.ToLower()) || bValue.ToLower().Contains(value.ToLower()))
+                    {
+                        jobs.Add(row);
+                    }
+                }
+                //string aValue = row[column];
+                //Console.WriteLine(row.Keys.Contains(value));
+                //Console.WriteLine(row.Values.Contains(value));
+                
+                
             }
 
             return jobs;
