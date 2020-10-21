@@ -75,9 +75,9 @@ namespace TechJobsConsole
                 {
 
                     string aValue = job.Key;
-                    Console.WriteLine(aValue);
+                    //Console.WriteLine(aValue);
                     string bValue = job.Value;
-                    Console.WriteLine(bValue);
+                   // Console.WriteLine(bValue);
 
                     if (aValue.ToLower().Contains(value.ToLower()) || bValue.ToLower().Contains(value.ToLower()))
                     {
